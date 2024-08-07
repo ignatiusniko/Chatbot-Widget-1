@@ -13,7 +13,59 @@
     ```
     rasa run actions --cors "*" --debug
     ```
-- If you're running the Rasa server on a remote server like an EC2 instance, it is necessary to modify the [constants.js](https://github.com/JiteshGaikwad/Chatbot-Widget/blob/main/static/js/constants.js#L2) and replace the localhost with the public IP address of the server.
 
-- Once you have you Rasa server up and running, you can test the bot by running the `index.html` file in the browser.
+- In your html file, import the `Chatbot Widget` module present inside [`dist/index.js`](../dist/index.js) as shown below
+
+```
+  <script>
+    !(function () {
+      let e = document.createElement("script"),
+        t = document.head || document.getElementsByTagName("head")[0];
+      (e.src = "./dist/index.js"),
+        (e.async = !0),
+        (e.onload = () => {
+          window.ChatbotWidget.default({
+            rasaServerUrl: "http://localhost:8000/webhooks",
+            userId: "jitesh97",
+            initialPayload: "/greet",
+            metadata: {},
+            botAvatar:
+              "",
+            widgetColor: "#a78bfa",
+            textColor: "#4c1d95",
+            userMsgBackgroundColor: "#e1d7ff",
+            botTitle: "Retail Bot",
+            botSubTitle: "Sales & Services Assistant",
+            botMsgBackgroundColor: "#f3f4f6",
+            botResponseDelay: "",
+            chatHeaderCss: {
+              textColor: "#4c1d95",
+              backgroundColor: "#a78bfa",
+              enableBotAvatarBorder: true,
+            },
+            chatHeaderTextColor: "#4c1d95",
+            botMsgColor: "#4b5563",
+            userMsgColor: "#4c1d95",
+            embedded: false,
+            buttonsCss: {
+              color: "#4c1d95",
+              backgroundColor: "#e1d7ff",
+              borderColor: "#4b5563",
+              borderWidth: "0px",
+              borderRadius: "999px",
+              hoverBackgroundColor: "white",
+              hoverColor: "#4b5563",
+              hoverborderWidth: "1px",
+              enableHover: false,
+            },
+          });
+        }),
+        t.insertBefore(e, t.firstChild);
+    })();
+  </script>
+```
+
+- Add your Rasa Server URL  to the config to `rasaServerUrl` param
+
+- Now you can open the html file in the browser and test the widget
 
